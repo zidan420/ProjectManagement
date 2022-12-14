@@ -427,19 +427,33 @@ void remove_project(const char *database)
         sscanf(line, "%d", &current_id);
         if (current_id == id)
         {
-            int text_to_be_replaced = strlen(line);
-            fseek(fp, text_to_be_replaced * -1, SEEK_CUR);    // get to the start of line which will be replaced (made blank)
-            for (int i = 0; i < text_to_be_replaced - 1; i++)
+            #ifdef unix
+            fseek(fp, strlen(line) * -1, SEEK_CUR);    // get to the start of line which will be replaced (made blank)
+            #endif
+
+            #ifdef WIN32
+            // fseek treats \n as 2 characters . So we need to add +1 to cover another character
+            fseek(fp, (strlen(line)+1) * -1, SEEK_CUR); // get to the start of line which will be replaced (made blank)
+            #endif
+            for (int i = 0; i < strlen(line)-1; i++)
             {
                 fprintf(fp, " ");                             // Overwrite with whitespace upto \n newline
             }
+
+            #ifdef unix
             fseek(fp, 1, SEEK_CUR);                           // Cover \n newline
+            #endif
+
+            #ifdef WIN32
+            fseek(fp, 2, SEEK_CUR);                           // Cover \n newline  // fseek treats \n as 2 characters
+            #endif
         }
     }
     fclose(fp);
 }
 
+/*
 void edit_project(const char *database)
 {
 }
-
+*/

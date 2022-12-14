@@ -2,7 +2,7 @@
 void csleep(int time)
 {
     #ifdef WIN32
-    Sleep(time * 1000);            // defined in windows.h // time is in milliseconds
+    Sleep(time * 1000);            // defined in windows.h
     #endif
 
     #ifdef unix
