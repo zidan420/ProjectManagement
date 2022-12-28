@@ -3,19 +3,11 @@ void list_options(void)
 {
     printf("%s[%s1%s] %sList Projects\n"  , KYEL, KRED, KYEL, KGRN);
     printf("%s[%s2%s] %sAdd Projects\n"   , KYEL, KRED, KYEL, KGRN);
-<<<<<<< HEAD
     printf("%s[%s3%s] %sEdit Projects\n"   , KYEL, KRED, KYEL, KGRN);
     printf("%s[%s4%s] %sRemove Projects\n" , KYEL, KRED, KYEL, KGRN);
     printf("%s[%s5%s] %sClear Screen\n"   , KYEL, KRED, KYEL, KGRN);
     printf("%s[%s6%s] %sAbout Me\n"       , KYEL, KRED, KYEL, KGRN);
     printf("%s[%s7%s] %sExit%s\n"         , KYEL, KRED, KYEL, KGRN, KNRM);
-=======
-    //printf("%s[%s3%s] %sEdit Projects (BUILT In Progress)\n"   , KYEL, KRED, KYEL, KGRN);
-    printf("%s[%s3%s] %sRemove Projects\n" , KYEL, KRED, KYEL, KGRN);
-    printf("%s[%s4%s] %sClear Screen\n"   , KYEL, KRED, KYEL, KGRN);
-    printf("%s[%s5%s] %sAbout Me\n"       , KYEL, KRED, KYEL, KGRN);
-    printf("%s[%s6%s] %sExit%s\n"         , KYEL, KRED, KYEL, KGRN, KNRM);
->>>>>>> d8f619b09f55600de241cc94b86e7bf261f91170
 }
 
 void get_option(int *option)

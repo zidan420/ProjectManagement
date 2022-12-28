@@ -21,11 +21,7 @@ void title(void)
     printf("$$ | \\_/ $$ |$$ |  $$ |$$ | \\$$ |$$ |  $$ |\\$$$$$$  |$$$$$$$$\\ $$ | \\_/ $$ |$$$$$$$$\\ $$ | \\$$ |   $$ |\n");
     printf("\\__|     \\__|\\__|  \\__|\\__|  \\__|\\__|  \\__| \\______/ \\________|\\__|     \\__|\\________|\\__|  \\__|   \\__|\n\n");
 
-<<<<<<< HEAD
     printf("\t\t\t\t%s~~%sPowered by Md Zidan Khan%s\n\n", KYEL, KMAG, KNRM);
-=======
-    printf("\t\t\t\t%s~%sPowered by Md Zidan Khan%s\n\n", KYEL, KMAG, KNRM);
->>>>>>> d8f619b09f55600de241cc94b86e7bf261f91170
 
     csleep(3);
 
