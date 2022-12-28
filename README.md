@@ -15,12 +15,12 @@ corposer:Corpos3r
 1. Download the zip file (https://github.com/zidan420/ProjectManagement/archive/refs/heads/main.zip)
 2. Extract the zip file
 3. Open the folder where the zip is extracted
-4. Either, 
+4. Either,
     + compile it using a compiler in cmd.exe:
 ```
 gcc project_management.c -o project_management
 ```
-4. Or, 
+4. Or,
     + Create a new ```empty project``` (in codeblocks or VS)
     + Add the ```c file```, the ```database folder``` and the ```header file```
     + Compile and run it
@@ -34,8 +34,8 @@ gcc project_management.c -o project_management
 + Uses encryption similar to ```brainfuck```
 + Provides ```Sign Up```/```Login``` facility
 + Uses mechanism to prevent ```Buffer overflow```
-+ **Purpose**: 
-    + For ```adding```, ```listing``` and ```removing``` projects
++ **Purpose**:
+    + For ```adding```, ```editing````, ```listing``` and ```removing``` projects
     + ```Storing``` Projects in Database
     + Each user gets ```1 database```
 
