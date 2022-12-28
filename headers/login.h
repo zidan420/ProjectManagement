@@ -20,6 +20,261 @@
 #define __MAX_CREDS_LINE__  MAX_USER+PASS_ENC_SIZE+DATABASE_LENGTH+3    // 3 is the total no. of delimiters * each delimiter length
 
 // Returns 0 or 1 // 1 --> success // 0 --> fail
+<<<<<<< HEAD
+=======
+// 1st arg --> text to encrypt
+// 2nd arg --> stores encrypted argument
+// 3rd arg --> Max. size of encrypted text
+// To calculate encrypted size:
+//      encrypted_size = 3 * max_number_of_characters + 1
+int encrypt_text(const char *text, char *encrypted_text, int encrypted_size)
+{
+    strcpy(encrypted_text, "");
+    int i, max_num_of_char;
+
+    // if remainder is 1 or 2
+    if (encrypted_size % 3 > 0)
+        max_num_of_char = encrypted_size / 3;
+    // if remainder is 0
+    else
+        max_num_of_char = encrypted_size / 3 - 1;
+
+    for (i = 0; i < strlen(text); i++)
+    {
+        // if text is larger than the max no. of characters allowed to encrypt
+        if (i >= max_num_of_char)
+        {
+            encrypted_text[i*3] = 0;    // add null byte
+            return 1;
+        }
+        switch (text[i])
+        {
+            // 0 - 9
+                // _.
+            case 48:
+                strcat(encrypted_text, "___");
+                break;
+            case 49:
+                strcat(encrypted_text, "__.");
+                break;
+            case 50:
+                strcat(encrypted_text, "_..");
+                break;
+            case 51:
+                strcat(encrypted_text, "...");
+                break;
+            case 52:
+                strcat(encrypted_text, ".._");
+                break;
+            case 53:
+                strcat(encrypted_text, ".__");
+                break;
+            case 54:
+                strcat(encrypted_text, "._.");
+                break;
+            case 55:
+                strcat(encrypted_text, "_._");
+                break;
+                // _+
+            case 56:
+                strcat(encrypted_text, "__+");
+                break;
+            case 57:
+                strcat(encrypted_text, "_++");
+                break;
+
+
+            // A - Z
+                // _+ (continue)
+            case 65:
+                strcat(encrypted_text, "+++");
+                break;
+            case 66:
+                strcat(encrypted_text, "++_");
+                break;
+            case 67:
+                strcat(encrypted_text, "+__");
+                break;
+            case 68:
+                strcat(encrypted_text, "+_+");
+                break;
+            case 69:
+                strcat(encrypted_text, "_+_");
+                break;
+                // .+
+            case 70:
+                strcat(encrypted_text, "..+");
+                break;
+            case 71:
+                strcat(encrypted_text, ".++");
+                break;
+            case 72:
+                strcat(encrypted_text, "++.");
+                break;
+            case 73:
+                strcat(encrypted_text, "+..");
+                break;
+            case 74:
+                strcat(encrypted_text, "+.+");
+                break;
+            case 75:
+                strcat(encrypted_text, ".+.");
+                break;
+                // _.+
+            case 76:
+                strcat(encrypted_text, "_.+");
+                break;
+            case 77:
+                strcat(encrypted_text, ".+_");
+                break;
+            case 78:
+                strcat(encrypted_text, "+_.");
+                break;
+            case 79:
+                strcat(encrypted_text, "+._");
+                break;
+            case 80:
+                strcat(encrypted_text, "_+.");
+                break;
+            case 81:
+                strcat(encrypted_text, "._+");
+                break;
+                // _-
+            case 82:
+                strcat(encrypted_text, "__-");
+                break;
+            case 83:
+                strcat(encrypted_text, "_--");
+                break;
+            case 84:
+                strcat(encrypted_text, "---");
+                break;
+            case 85:
+                strcat(encrypted_text, "--_");
+                break;
+            case 86:
+                strcat(encrypted_text, "-__");
+                break;
+            case 87:
+                strcat(encrypted_text, "-_-");
+                break;
+            case 88:
+                strcat(encrypted_text, "_-_");
+                break;
+                // .-
+            case 89:
+                strcat(encrypted_text, "..-");
+                break;
+            case 90:
+                strcat(encrypted_text, ".--");
+                break;
+
+            // a - z
+                // .- (continue)
+            case 97:
+                strcat(encrypted_text, "--.");
+                break;
+            case 98:
+                strcat(encrypted_text, "-..");
+                break;
+            case 99:
+                strcat(encrypted_text, "-.-");
+                break;
+            case 100:
+                strcat(encrypted_text, ".-.");
+                break;
+                // +-
+            case 101:
+                strcat(encrypted_text, "++-");
+                break;
+            case 102:
+                strcat(encrypted_text, "+--");
+                break;
+            case 103:
+                strcat(encrypted_text, "--+");
+                break;
+            case 104:
+                strcat(encrypted_text, "-++");
+                break;
+            case 105:
+                strcat(encrypted_text, "-+-");
+                break;
+            case 106:
+                strcat(encrypted_text, "+-+");
+                break;
+                // _.-
+            case 107:
+                strcat(encrypted_text, "_.-");
+                break;
+            case 108:
+                strcat(encrypted_text, ".-_");
+                break;
+            case 109:
+                strcat(encrypted_text, "-_.");
+                break;
+            case 110:
+                strcat(encrypted_text, "-._");
+                break;
+            case 111:
+                strcat(encrypted_text, "_-.");
+                break;
+            case 112:
+                strcat(encrypted_text, "._-");
+                break;
+                // _+-
+            case 113:
+                strcat(encrypted_text, "_+-");
+                break;
+            case 114:
+                strcat(encrypted_text, "+-_");
+                break;
+            case 115:
+                strcat(encrypted_text, "-_+");
+                break;
+            case 116:
+                strcat(encrypted_text, "-+_");
+                break;
+            case 117:
+                strcat(encrypted_text, "_-+");
+                break;
+            case 118:
+                strcat(encrypted_text, "+_-");
+                break;
+                // .+-
+            case 119:
+                strcat(encrypted_text, ".+-");
+                break;
+            case 120:
+                strcat(encrypted_text, "+-.");
+                break;
+            case 121:
+                strcat(encrypted_text, "-.+");
+                break;
+            case 122:
+                strcat(encrypted_text, "-+.");
+                break;
+
+            // Special Characters (@, SPACE)
+                // .+- (Continue)
+            case 32:
+                strcat(encrypted_text, ".-+");
+                break;
+            case 64:
+                strcat(encrypted_text, "+.-");
+                break;
+
+            // Unknown (Invalid) Characters
+            default:
+                strcpy(encrypted_text, "");
+                return 0;
+        }
+    }
+    encrypted_text[i*3] = 0;
+    return 1;
+}
+
+// Returns 0 or 1 // 1 --> success // 0 --> fail
+>>>>>>> d8f619b09f55600de241cc94b86e7bf261f91170
 // If credentials match, database name of the corresponding account is stored in 3rd argument
 // 2nd arg --> password is encrypted
 int check_creds(const char *username, const char *password, char *database_name)

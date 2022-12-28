@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 #define ALLOWED_CHAR 64          // 10+26*2+2=64
 
 char ENCRYPT_DICT[ALLOWED_CHAR][2][4] = {
@@ -43,6 +44,8 @@ char ENCRYPT_DICT[ALLOWED_CHAR][2][4] = {
                    };
 
 
+=======
+>>>>>>> d8f619b09f55600de241cc94b86e7bf261f91170
 // Always take input from stdin
 // pass char array as 1st argument to store user input // must be empty array
 // 2nd argument is maximum number of characters including null byte (\0) // max_char = 10 means 9 characters and 1 null byte
@@ -112,8 +115,67 @@ int find_all_occurences(const char *text, const char *delimiter, int occur_array
     return array_i;
 }
 
+<<<<<<< HEAD
 // name, pass and db are overwritten
 // parse creds line
+=======
+// id, name and other parameters are overwritten
+void parse_dline(const char *line, const char *delimiter, char *id, char *name, char *comment, char *status, char *mark)
+{
+    int num_of_occur = 5;
+    int all_occur[num_of_occur], j = 0;
+
+    find_all_occurences(line, delimiter, all_occur, num_of_occur);
+
+    // empty variables before parsing
+    strcpy(id, "");
+    strcpy(name, "");
+    strcpy(comment, "");
+    strcpy(status, "");
+    strcpy(mark, "");
+
+    for (int i = 0; i < all_occur[0]; i++)
+    {
+        id[j] = line[i];
+        j++;
+    }
+    id[j] = 0;          // add null byte at the end of string
+    j = 0;              // reset
+
+    for (int i = all_occur[0] + strlen(delimiter); i < all_occur[1]; i++)
+    {
+        name[j] = line[i];
+        j++;
+    }
+    name[j] = 0;        // add null byte at the end of string
+    j = 0;              // reset
+
+    for (int i = all_occur[1] + strlen(delimiter); i < all_occur[2]; i++)
+    {
+        comment[j] = line[i];
+        j++;
+    }
+    comment[j] = 0;     // add null byte at the end of string
+    j = 0;              // reset
+
+    for (int i = all_occur[2] + strlen(delimiter); i < all_occur[3]; i++)
+    {
+        status[j] = line[i];
+        j++;
+    }
+    status[j] = 0;      // add null byte at the end of string
+    j = 0;              // reset
+
+    for (int i = all_occur[3] + strlen(delimiter); i < all_occur[4]; i++)
+    {
+        mark[j] = line[i];
+        j++;
+    }
+    mark[j] = 0;       // add null byte at the end of string
+}
+
+// name, pass and db are overwritten
+>>>>>>> d8f619b09f55600de241cc94b86e7bf261f91170
 void parse_cline(const char*line, const char *delimiter, char *username, char *encoded_pass, char *database_name)
 {
     // empty variables
@@ -154,11 +216,16 @@ void parse_cline(const char*line, const char *delimiter, char *username, char *e
 }
 
 // line is empty if it contains only whitespace characters or \n newline (or \0 null character)
+<<<<<<< HEAD
 int line_is_empty(const char *line)
 {
     if (strlen(line) == 0)
         return 1;
 
+=======
+int line_is_empty(char *line)
+{
+>>>>>>> d8f619b09f55600de241cc94b86e7bf261f91170
     // -1 to avoid \n or any null characters
     for (int i = 0; i < strlen(line) - 1; i++)
         // line is not empty
@@ -168,6 +235,7 @@ int line_is_empty(const char *line)
     return 1;
 }
 
+<<<<<<< HEAD
 // Returns 0 or 1 // 1 --> success // 0 --> fail
 // 1st arg --> char to encrypt
 // 2nd arg --> stores encrypted argument
@@ -262,3 +330,5 @@ int decrypt_text(const char *text, char *decrypted_text, int decrypted_size)
     }
     return 1;
 }
+=======
+>>>>>>> d8f619b09f55600de241cc94b86e7bf261f91170
