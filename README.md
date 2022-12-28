@@ -35,7 +35,7 @@ gcc project_management.c -o project_management
 + Provides ```Sign Up```/```Login``` facility
 + Uses mechanism to prevent ```Buffer overflow```
 + **Purpose**:
-    + For ```adding```, ```editing````, ```listing``` and ```removing``` projects
+    + For ```adding```, ```editing```, ```listing``` and ```removing``` projects
     + ```Storing``` Projects in Database
     + Each user gets ```1 database```
 
