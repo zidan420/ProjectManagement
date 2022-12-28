@@ -37,10 +37,10 @@ void animate_text(char *str, int index, int count)
         str[strlen(str)-1] = '\\';
     }
 
-    usleep(150*1000);
-
     printf("%s\r", temp);
     fflush(stdout);
+
+    csleep(150);    // milliseconds
 
     animate_text(str, index+1, count+1);
 }

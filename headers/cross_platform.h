@@ -1,12 +1,12 @@
 
-void csleep(int time)
+void csleep(int time_in_millisec)
 {
     #ifdef WIN32
-    Sleep(time * 1000);            // defined in windows.h
+    Sleep(time_in_millisec);            // defined in windows.h
     #endif
 
     #ifdef unix
-    sleep(time);            // defined in unistd.h
+    usleep(time_in_millisec*1000);            // defined in unistd.h
     #endif
 }
 
