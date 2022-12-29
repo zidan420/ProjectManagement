@@ -5,17 +5,18 @@ void menu(const char *database)
     int option;                 // contains user-selected option
     while (1)
     {
+        int i = 1;
         list_options();
 
         get_option(&option);    // Stores the option that user selected into option variable using pointer indirect reference
 
-        if (option == 1) list_projects(database);          // List Projects
-        else if (option == 2) add_project(database);       // Add Projects
-        else if (option == 3) edit_project(database);      // Edit Projects
-        else if (option == 4) remove_project(database);    // Remove Projects
-        else if (option == 5) cls();                       // Clear Screen
-        else if (option == 6) about_us();                  // About us
-        else if (option == 7) break;                       // Exit
+        if (option == i++) list_projects(database);          // List Projects
+        else if (option == i++) add_project(database);       // Add Projects
+        else if (option == i++) edit_project(database);      // Edit Projects
+        else if (option == i++) remove_project(database);    // Remove Projects
+        else if (option == i++) cls();                       // Clear Screen
+        else if (option == i++) about_us();                  // About us
+        else if (option == i++) break;                       // Exit
         else print_help();                                 // Show help
     }
 }
