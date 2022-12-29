@@ -20,6 +20,7 @@ void animate_text(char *str, int index, int count)
     {
         temp[strlen(str)-1] = '|';
         str[strlen(str)-1] = '|';
+        beep();                                     // beep for 150 ms
     }
     else if (temp[strlen(str)-1] == '|')
     {
