@@ -5,7 +5,7 @@
 // Windows
 #ifdef WIN32
 #include <io.h>                   // for using access() of linux in Windows
-#include <windows.h>              // Sleep()
+#include <windows.h>              // Sleep() // Beep()
 #endif
 
 // Linux
