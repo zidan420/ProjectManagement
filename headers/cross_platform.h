@@ -7,10 +7,11 @@ int take_pass(char *text, int max_char)
     #ifdef WIN32
         for (int i = 0; i < max_char; i++)
         {
-            test[i] = getch();
-            if (test[i] == '\n')
+            text[i] = getch();
+            if (text[i] == '\r')
             {
-                test[i] = 0;
+                text[i] = 0;
+                printf("\n");
                 return 0;
             }
             printf("*");
