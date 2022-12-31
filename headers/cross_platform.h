@@ -20,7 +20,7 @@ int take_pass(char *text, int max_char)
     #endif
 
     #ifdef unix
-        text = getpass("");
+        strcpy(text, getpass(""));
         if (strlen(text) > max_char-1)
         {
             text[max_char-1] = 0;

@@ -1,9 +1,6 @@
 
 // Database File
-#define DEFAULT_DATABASE "Database/projects.txt"
-
-// Maximum Length of Database Name
-#define DATABASE_LENGTH 100                       // 99 characters + 1 null byte
+#define DEFAULT_DATABASE "Database/corposer.dat"
 
 // Credentials File
 #define __CREDS__ "Database/creds.txt"
@@ -15,6 +12,7 @@
 // Maximum Length of Credentials
 #define MAX_USER            101                    // max 100 characters + 1 null byte
 #define MAX_PASS            101                    // max 100 characters + 1 null byte
+#define DATABASE_LENGTH     MAX_USER + 4           // 4 is for '.dat'
 // * 3 is because 1 character takes space of 3 characters when encoded.. +1 is for null byte
 #define PASS_ENC_SIZE       (MAX_PASS - 1) * 3 + 1      // (101 - 1) * 3 + 1 = 301
 #define __MAX_CREDS_LINE__  MAX_USER+PASS_ENC_SIZE+DATABASE_LENGTH+3    // 3 is the total no. of delimiters * each delimiter length
@@ -164,23 +162,13 @@ void signup(char *username, char *password, char *encrypted_pass, char *database
         return;
     }
 
-    printf("%sDatabase:%s ", KYEL, KNRM);
-    take_input(database, DATABASE_LENGTH);
-
-    // If database matches, invalid signup
-    if (ud_already_taken(database, 1))
-    {
-        printf("%sDatabase is already in use with another account%s\n", KRED, KNRM);
-        return;
-    }
-    if (strlen(database) == 0)
-    {
-        printf("%sDatabase cannot be empty!%s", KRED, KNRM);
-        return;
-    }
-
-    // Encrypt Password before checking
+    // Encrypt Password before storing
     encrypt_text(password, encrypted_pass, PASS_ENC_SIZE);
+
+    // set database
+    strcat(database, "Database/");
+    strcat(database, username);
+    strcat(database, ".dat");
 
     FILE *fp;
 
@@ -208,12 +196,26 @@ int login(char *database_name)
     // if file does NOT exist, create default credentials
     if (access(__CREDS__, F_OK) != 0)
     {
-        // Check if you have write access in current folder
+        // if database does not exists
+        if (access("Database", F_OK) != 0)
+        {
+            if (access(".", W_OK) != 0)
+            {
+                printf("%sPermission Denied%s\n", KRED, KNRM);
+                return 0;
+            }
+            // create database file
+            system("mkdir Database");
+        }
+
+        // Check for write access in Database folder
         if (access("Database", W_OK) != 0)
         {
             printf("%sPermission Denied%s\n", KRED, KNRM);
             return 0;
         }
+
+        // Create a credential file (creds.txt)
         FILE *fp;
         fp = fopen(__CREDS__, "w");
 
@@ -249,7 +251,7 @@ int login(char *database_name)
         take_input(username, MAX_USER);
 
         printf("%sPassword:%s ", KYEL, KNRM);
-        take_input(password, MAX_PASS);
+        take_pass(password, MAX_PASS);
 
         // Sign Up // Create new account
         if (strlen(username) == 0 && strlen(password) == 0)
@@ -262,13 +264,9 @@ int login(char *database_name)
         encrypt_text(password, encrypted_pass, PASS_ENC_SIZE);
         // Check for match of credentials
         if (check_creds(username, encrypted_pass, database_name))
-        {
             return 1;   // logged_in is 1
-        }
         else
-        {
             printf("%sError: Invalid username or password.\n%s", KRED, KNRM);
-        }
     }
     return 0;
 }

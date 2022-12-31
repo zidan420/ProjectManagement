@@ -48,7 +48,7 @@ char ENCRYPT_DICT[ALLOWED_CHAR][2][4] = {
 // 2nd argument is maximum number of characters including null byte (\0)
 // max_char = 10 means 9 characters and 1 null byte
 // Deletes characters after the MAXIMUM SIZE
-// int return type --> 0 means success, 1 means exceeds max char (overflow)
+// int return type --> -1 means fail, 0 means success, 1 means exceeds max char (overflow)
 int take_input(char *text, int max_char)
 {
     if (fgets(text, max_char, stdin))
@@ -71,6 +71,7 @@ int take_input(char *text, int max_char)
             return 1;
         }
     }
+    return -1;
 }
 
 // Returns number of occurences Found // 0 if no occurence found
