@@ -13,10 +13,10 @@
 #define DEFAULT_PASS "Corpos3r"
 
 // Maximum Length of Credentials
-#define MAX_USER            15                    // max 14 characters + 1 null byte
-#define MAX_PASS            40                    // max 39 characters + 1 null byte
+#define MAX_USER            101                    // max 100 characters + 1 null byte
+#define MAX_PASS            101                    // max 100 characters + 1 null byte
 // * 3 is because 1 character takes space of 3 characters when encoded.. +1 is for null byte
-#define PASS_ENC_SIZE       (MAX_PASS - 1) * 3 + 1      // (40 - 1) * 3 + 1 = 118
+#define PASS_ENC_SIZE       (MAX_PASS - 1) * 3 + 1      // (101 - 1) * 3 + 1 = 301
 #define __MAX_CREDS_LINE__  MAX_USER+PASS_ENC_SIZE+DATABASE_LENGTH+3    // 3 is the total no. of delimiters * each delimiter length
 
 // Returns 0 or 1 // 1 --> success // 0 --> fail
@@ -132,7 +132,11 @@ void signup(char *username, char *password, char *encrypted_pass, char *database
     printf("%sTo create a new account, enter the following:\n%s", KGRN, KNRM);
 
     printf("%sUsername:%s ", KYEL, KNRM);
-    take_input(username, MAX_USER);
+    if (take_input(username, MAX_USER))
+    {
+        printf("%sUsername can be at most %d characters\n%s",KRED, MAX_USER-1, KNRM);
+        return;
+    }
 
     // If username matches, invalid signup
     if (ud_already_taken(username, 0))
@@ -148,7 +152,11 @@ void signup(char *username, char *password, char *encrypted_pass, char *database
     }
 
     printf("%sPassword:%s ", KYEL, KNRM);
-    take_input(password, MAX_PASS);
+    if (take_pass(password, MAX_PASS))
+    {
+        printf("%sPassword can be at most %d characters%s\n", KRED, MAX_PASS-1, KNRM);
+        return;
+    }
 
     if (strlen(password) < 8)
     {

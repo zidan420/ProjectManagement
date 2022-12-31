@@ -44,10 +44,12 @@ char ENCRYPT_DICT[ALLOWED_CHAR][2][4] = {
 
 
 // Always take input from stdin
-// pass char array as 1st argument to store user input // must be empty array
-// 2nd argument is maximum number of characters including null byte (\0) // max_char = 10 means 9 characters and 1 null byte
-// Removes/Deletes characters after the MAXIMUM SIZE
-void take_input(char *text, int max_char)
+// pass char array as 1st argument to store user input // should be empty array
+// 2nd argument is maximum number of characters including null byte (\0)
+// max_char = 10 means 9 characters and 1 null byte
+// Deletes characters after the MAXIMUM SIZE
+// int return type --> 0 means success, 1 means exceeds max char (overflow)
+int take_input(char *text, int max_char)
 {
     if (fgets(text, max_char, stdin))
     {
@@ -55,14 +57,18 @@ void take_input(char *text, int max_char)
         // strchr searches for 1st occurence of char '\n' and returns pointer char
         if(p=strchr(text, '\n'))
         {
-            *p = '\0';  // changes \n to null byte
+            *p = '\0';  // changes \n to null bytew
+            return 0;
         }
         // Consumes extra buffer upto and including \n
         else
         {
             //scanf("%*[^\n]");
             //scanf("%*c");
-            while (fgetc(stdin) != '\n');
+            if (fgetc(stdin) == '\n')       // exactly 39 characters
+                return 0;
+            while (fgetc(stdin) != '\n');   // more than 39 characters
+            return 1;
         }
     }
 }

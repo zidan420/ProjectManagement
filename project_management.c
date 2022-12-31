@@ -6,6 +6,7 @@
 #ifdef WIN32
 #include <io.h>                   // for using access() of linux in Windows
 #include <windows.h>              // Sleep() // Beep()
+#include <conio.h>                // getch()        // works only in MS-DOS compilers like turbo
 #endif
 
 // Linux
